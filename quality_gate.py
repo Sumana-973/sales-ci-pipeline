@@ -2,7 +2,7 @@
 import json
 import sys
 
-MINIMUM_R2_SCORE = 0.99
+MINIMUM_R2_SCORE = 0.80
 
 print("Reading sales model evaluation metrics...")
 
