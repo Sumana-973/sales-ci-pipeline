@@ -82,10 +82,16 @@ def predict():
             "prediction": round(prediction, 2)
         })
 
-    except (TypeError, ValueError):
+        except (TypeError, ValueError):
         return jsonify({
             "error": "All feature values must be valid numbers"
         }), 400
+    except Exception as error:
+        app.logger.exception("Prediction failed")
+        return jsonify({
+            "error": "Prediction failed",
+            "details": str(error)
+        }), 500
 
 
 if __name__ == "__main__":
