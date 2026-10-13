@@ -54,6 +54,7 @@ def predict():
             "missing_fields": missing_fields
         }), 400
 
+    
     try:
         sample = pd.DataFrame([{
             feature: float(data[feature])
@@ -64,10 +65,15 @@ def predict():
             sample[feature].map(
                 lambda value: pd.notna(value) and value >= 0
             ).all()
-            for feature in ["Quantity_Sold", "Unit_Cost", "Unit_Price"]
+            for feature in [
+                "Quantity_Sold",
+                "Unit_Cost",
+                "Region_Code",
+                "Product_Code"
+            ]
         ):
             return jsonify({
-                "error": "Quantity and prices must be non-negative"
+                "error": "Quantity, cost, and codes must be non-negative"
             }), 400
 
         if not 0 <= sample["Discount"].iloc[0] <= 1:
@@ -82,16 +88,17 @@ def predict():
             "prediction": round(prediction, 2)
         })
 
-        except (TypeError, ValueError):
+    except (TypeError, ValueError):
         return jsonify({
             "error": "All feature values must be valid numbers"
         }), 400
-    except Exception as error:
+
+    except Exception:
         app.logger.exception("Prediction failed")
         return jsonify({
-            "error": "Prediction failed",
-            "details": str(error)
+            "error": "Prediction failed"
         }), 500
+
 
 
 if __name__ == "__main__":
