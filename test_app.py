@@ -16,7 +16,8 @@ class TestSalesPredictionApplication(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["status"], "ok")
 
-    @patch("app.load_model")
+    
+        @patch("app.load_model")
     def test_prediction_endpoint(self, mock_load_model):
         mock_model = mock_load_model.return_value
         mock_model.predict.return_value = [1250.50]
@@ -24,13 +25,16 @@ class TestSalesPredictionApplication(unittest.TestCase):
         response = self.client.post(
             "/predict",
             json={
-    "Quantity_Sold": 10,
-    "Unit_Cost": 50,
-    "Discount": 0.1,
-    "Region_Code": 1,
-    "Product_Code": 2
-}
+                "Quantity_Sold": 10,
+                "Unit_Cost": 50,
+                "Discount": 0.1,
+                "Region_Code": 1,
+                "Product_Code": 2
+            }
         )
+
+        print("Response status:", response.status_code)
+        print("Response data:", response.get_json())
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
