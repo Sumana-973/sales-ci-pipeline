@@ -43,6 +43,23 @@ jobs:
         run: python -m unittest test_app.py -v
 
         
+      - name: Prepare release candidate
+        run: |
+          mkdir -p release_candidate
+          cp app.py release_candidate/
+          cp sales_model.pkl release_candidate/
+          cp metrics.json release_candidate/
+          cp requirements.txt release_candidate/
+          printf "Sales Prediction ML Application\nRun: python app.py\nEndpoint: POST /predict\n" > release_candidate/DEPLOYMENT.txt
+
+      - name: Upload release candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: sales-ml-release
+          path: release_candidate/
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload ML artifacts
         uses: actions/upload-artifact@v4
         with:
