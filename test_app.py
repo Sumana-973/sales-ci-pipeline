@@ -24,11 +24,12 @@ class TestSalesPredictionApplication(unittest.TestCase):
         response = self.client.post(
             "/predict",
             json={
-                "Quantity_Sold": 10,
-                "Unit_Cost": 50,
-                "Unit_Price": 150,
-                "Discount": 0.1
-            }
+    "Quantity_Sold": 10,
+    "Unit_Cost": 50,
+    "Discount": 0.1,
+    "Region_Code": 1,
+    "Product_Code": 2
+}
         )
 
         self.assertEqual(response.status_code, 200)
@@ -62,11 +63,12 @@ class TestSalesPredictionApplication(unittest.TestCase):
         response = self.client.post(
             "/predict",
             json={
-                "Quantity_Sold": -10,
-                "Unit_Cost": 50,
-                "Unit_Price": 150,
-                "Discount": 0.1
-            }
+    "Quantity_Sold": -10,
+    "Unit_Cost": 50,
+    "Discount": 0.1,
+    "Region_Code": 1,
+    "Product_Code": 2
+}
         )
 
         self.assertEqual(response.status_code, 400)
