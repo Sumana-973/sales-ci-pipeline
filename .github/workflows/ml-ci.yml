@@ -39,6 +39,9 @@ jobs:
       - name: Run automated ML tests
         run: python -m unittest discover -v
 
+      - name: Run prediction API tests
+        run: python -m unittest test_app.py -v
+
         
       - name: Upload ML artifacts
         uses: actions/upload-artifact@v4
