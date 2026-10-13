@@ -12,8 +12,9 @@ MODEL_PATH = Path("sales_model.pkl")
 FEATURES = [
     "Quantity_Sold",
     "Unit_Cost",
-    "Unit_Price",
-    "Discount"
+    "Discount",
+    "Region_Code",
+    "Product_Code"
 ]
 
 
