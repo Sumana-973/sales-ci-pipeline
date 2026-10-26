@@ -7,6 +7,10 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+@app.get("/health")
+def health():
+    return jsonify({"status": "healthy"})
+
 MODEL_PATH = Path("sales_model.pkl")
 
 FEATURES = [
