@@ -12,7 +12,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/sales-ml
+  IMAGE_NAME: sumana-973/sales-ml
 
 jobs:
   build-test-publish:
